@@ -2,7 +2,9 @@
 [![Build Status](https://travis-ci.org/expo/exponent-server-sdk-ruby.svg?branch=master)](https://travis-ci.org/expo/exponent-server-sdk-ruby)
 [![Gem Version](https://badge.fury.io/rb/exponent-server-sdk.svg)](https://badge.fury.io/rb/exponent-server-sdk)
 
-Use to send push notifications to Exponent Experiences from a Ruby server.
+FIX: Doing this because SDK has a bug
+
+(fix) Validation situations where Expo returns a 200 with an error #14
 
 ## Installation
 

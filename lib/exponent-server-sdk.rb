@@ -77,7 +77,11 @@ module Exponent
       end
 
       def extract_data(response)
-        response.fetch('data').first
+        # response.fetch('data').first
+        data_response = response.fetch('data')
+        return data_response.first if data_response.is_a? Array
+
+        data_response
       end
 
       def validate_status(status, response)
@@ -107,7 +111,8 @@ module Exponent
       end
 
       def from_erroneous_response(response)
-        error      = response.fetch('errors').first
+        error      = extract_key(response, 'errors')
+        # error      = response.fetch('errors').first
         error_name = error.fetch('code')
         message    = error.fetch('message')
 
@@ -115,10 +120,17 @@ module Exponent
       end
 
       def from_successful_response(response)
-        data    = response.fetch('data').first
+        data    = extract_key(response, 'data')
+        # data    = response.fetch('data').first
         message = data.fetch('message')
 
         get_error_class(data.fetch('details').fetch('error')).new(message)
+      end
+
+      def extract_key(object, key)
+        key_response = object.fetch(key)
+        return key_response.first if key_response.is_a? Array
+         key_response
       end
 
       def validate_error_name(condition)
